@@ -1,0 +1,11 @@
+{
+	"items": [{
+		"scene_id": "636b2ef11ac8f7000192213a",
+		"resource_hash": "lnw8XdjqdQrkdeW2xKPr2Oq5l8jl",
+		"resource_download_url": "https://resources.tide.moreless.io/sounds/lnw8XdjqdQrkdeW2xKPr2Oq5l8jl?e=1687443288&token=u4tBlo_XwtYeHkdWvCHRDkdNP2JILjAlYKsXsauB:MPn4pqQNIHOdThHXzSgGkjHNk3U=",
+		"resource_audio_type": "stereo",
+		"video_cover_hash_key": "",
+		"video_cover_download_url": ""
+	}],
+	"qiniu_edge_ips": ["221.195.241.91", "221.195.241.100"]
+}

@@ -1,0 +1,24 @@
+{
+    "items": [
+        {
+            "scene_id": "5e54abfcc496e0000669d2c9",
+            "resource_hash": "lqVsojtUa0PGHanLKJwjWHMPyhP3",
+            "resource_download_url": "https://resources.tide.moreless.io/sounds/lqVsojtUa0PGHanLKJwjWHMPyhP3?e=1687442829&token=u4tBlo_XwtYeHkdWvCHRDkdNP2JILjAlYKsXsauB:KHo20s7CakFXSVCU5lPtzQe-kKw=",
+            "resource_audio_type": "stereo",
+            "video_cover_hash_key": "sounds/lvDVU9NMXgW_nxE-dHVpyxgOr3_d",
+            "video_cover_download_url": "https://resources.tide.moreless.io/sounds/lvDVU9NMXgW_nxE-dHVpyxgOr3_d?e=1687442829&token=u4tBlo_XwtYeHkdWvCHRDkdNP2JILjAlYKsXsauB:3tPrgY30_bz7uTesXTw7GO5BEnM="
+        },
+        {
+            "scene_id": "5a560d113ea0bf00086a36a8",
+            "resource_hash": "luadFKfSat4vp63vyZ_1zlC-8rnS",
+            "resource_download_url": "https://resources.tide.moreless.io/sounds/luadFKfSat4vp63vyZ_1zlC-8rnS?e=1687442829&token=u4tBlo_XwtYeHkdWvCHRDkdNP2JILjAlYKsXsauB:cSyG09AkUk5c2yTiMPQgXwVK9Z0=",
+            "resource_audio_type": "stereo",
+            "video_cover_hash_key": "sounds/loYXHbXsjvGw0lxZsZzz2S46IGjJ",
+            "video_cover_download_url": "https://resources.tide.moreless.io/sounds/loYXHbXsjvGw0lxZsZzz2S46IGjJ?e=1687442829&token=u4tBlo_XwtYeHkdWvCHRDkdNP2JILjAlYKsXsauB:cqApdEhD4TdorObuZuoR1Ub3uBM="
+        }
+    ],
+    "qiniu_edge_ips": [
+        "221.195.241.91",
+        "221.195.241.100"
+    ]
+}
