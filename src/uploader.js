@@ -23,14 +23,18 @@ async function main() {
   for (let filePath of filePaths) {
     const fileKey = filePath.replace(path.join(__dirname, "../downloads/"), "");
     if (!NEED_REFRESH_FILE.some((match) => fileKey.includes(match))) {
-      const isExist = await client.doesBucketExist(bucket, fileKey);
-      if (isExist) {
-        console.log(`skip: ${fileKey}`);
-        continue;
+      try {
+        const isExist = await client.getObjectMetadata(bucket, fileKey);
+        if (isExist) {
+          console.log(`资源已存在，已跳过，fileKey: ${fileKey}`);
+          continue;
+        }
+      } catch (error) {
+        console.log(`资源不存在，正在尝试上传`);
       }
     }
     await client.putObjectFromFile(bucket, fileKey, filePath);
-    console.log(`upload success: ${fileKey}`);
+    console.log(`上传成功，fileKey: ${fileKey}`);
   }
 }
 

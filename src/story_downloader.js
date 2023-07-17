@@ -3,33 +3,29 @@ dotenv.config();
 const fs = require("fs");
 const path = require("path");
 const { download } = require("./utils/download");
-const allScenes = require("../assets/scene_pages.json").scenes;
+const allScenes = require("../assets/sleep_story_pages.json").sleep_stories;
 
 const NEED_DOWNLOAD = JSON.parse(process.env.NEED_DOWNLOAD);
-const UPLOAD_CDN_PATH = `${process.env.BOS_CDN_URL}/scenes`;
+const UPLOAD_CDN_PATH = `${process.env.BOS_CDN_URL}/sleep_stories`;
 
 async function main() {
   let sceneSources = [];
   const sceneFiles = fs.readdirSync(
-    path.resolve(__dirname, "../assets/source/scenes")
+    path.resolve(__dirname, "../assets/source/sleep_stories")
   );
   sceneFiles.forEach((file) => {
     if (file.endsWith(".json")) {
-      const fileContent = require(`../assets/source/scenes/${file}`);
-      if (fileContent.items instanceof Array) {
-        sceneSources.push(...fileContent.items);
-      }
+      const fileContent = require(`../assets/source/sleep_stories/${file}`);
+      sceneSources.push(fileContent);
     }
   });
 
   sceneSources = sceneSources.map((sceneSource) => {
     const sceneInfo = allScenes.find(
-      (scene) => scene.id === sceneSource.scene_id
+      (scene) => scene.resources_v2[0].hash === sceneSource.hash
     );
     if (!sceneInfo)
-      throw new Error(
-        `找不到对应的资源，请更新 scene_pages.json, scene_id：${sceneSource.scene_id}`
-      );
+      throw new Error(`找不到对应的资源，请更新 sleep_story_pages.json，hash：${sceneSource.hash}`);
     return {
       id: sceneInfo.id,
       name: sceneInfo.name,
@@ -37,7 +33,7 @@ async function main() {
       description: sceneInfo.description,
       simple_tags: sceneInfo.simple_tags,
       primary_color: sceneInfo.primary_color,
-      is_dolby: !!sceneInfo.resource.dolby_hash,
+      is_dolby: !!sceneInfo.resources_v2.dolby_hash,
       video_cover_url: sceneInfo.video_cover_url,
       video_cover_demo_url: sceneInfo.video_cover_demo_url,
       image: sceneInfo.image,
@@ -53,10 +49,10 @@ async function main() {
       const imgUrl = source.image;
       const videoCoverUrl = source.video_cover_url;
       const videoUrl = source.video_cover_demo_url;
-      const soundUrl = source.resource_download_url;
+      const soundUrl = source.url;
 
       // 创建文件夹
-      const scenePath = path.resolve(DOWNLOAD_PATH, `./scenes/${id}`);
+      const scenePath = path.resolve(DOWNLOAD_PATH, `./sleep_stories/${id}`);
       if (!fs.existsSync(scenePath)) {
         fs.mkdirSync(scenePath);
       } else {
@@ -82,8 +78,7 @@ async function main() {
   cpSceneSources.forEach((source) => {
     source.image &&
       (source.image = `${UPLOAD_CDN_PATH}/${source.id}/image.jpg`);
-    source.resource_download_url &&
-      (source.resource_download_url = `${UPLOAD_CDN_PATH}/${source.id}/sound.mp3`);
+    source.url && (source.url = `${UPLOAD_CDN_PATH}/${source.id}/sound.mp3`);
     source.video_cover_url &&
       (source.video_cover_url = `${UPLOAD_CDN_PATH}/${source.id}/video_cover.jpg`);
     source.video_cover_demo_url &&
@@ -91,7 +86,7 @@ async function main() {
   });
   const sceneSourcesJson = JSON.stringify(cpSceneSources, null, 2);
   fs.writeFileSync(
-    path.resolve(__dirname, "../downloads/scenes/sources.json"),
+    path.resolve(__dirname, "../downloads/sleep_stories/sources.json"),
     sceneSourcesJson
   );
 
